@@ -56,8 +56,8 @@ def quickSort(L, start, stop):
         return
 
     p = partition(L, start, stop)
-    quickSort(L, start, p-1)  # sort the "lesser" list
-    quickSort(L, p+1,   stop)  # sort the "greater" list
+    quickSort(L, start, p - 1)  # sort the "lesser" list
+    quickSort(L, p + 1, stop)  # sort the "greater" list
 
 
 # helper function to draw a bar chart with with the unsorted and sorted array
@@ -74,14 +74,17 @@ def chart(array):
 def test(unsorted_subs, sorted_subs, k):
 
     # just finds the actual results to reference against the results the algo gets
-    sorted_array = [element for element in sorted(unsorted_subs, key=lambda x: x[1], reverse=True)[:k]]
+    sorted_array = [
+        element
+        for element in sorted(unsorted_subs, key=lambda x: x[1], reverse=True)[:k]
+    ]
 
     # the results the algo gets
     quicksorted_array = sorted_subs
 
     # throws an assertion error if the first twenty elements of the builtin-sorted array and the quicksorted array
     # are not the same, ignoring order of elements
-    assert(set(sorted_array) == set(quicksorted_array[:k]))
+    assert set(sorted_array) == set(quicksorted_array[:k])
 
 
 # helper function to time the algorithms
@@ -94,7 +97,7 @@ def timer(function_call, name):
 
 
 def temp():
-    quickSort(subs, 0, len(subs)-1)
+    quickSort(subs, 0, len(subs) - 1)
 
 
 def temp2():
@@ -113,18 +116,16 @@ def partition(array, start, stop):
     pivot_position, pivot_value = start, array[start]
 
     # start+1 to remove redundant self comparison, stop+1 because range is exclusive
-    for current_position in range(start+1, stop+1):
+    for current_position in range(start + 1, stop + 1):
 
         # CHANGE: use [1] to compare timestamps instead of the entire tuples
         # CHANGE: < to > to sort it descending instead of ascending
-        if (
-            array[current_position][1] > pivot_value[1]
-        ):
+        if array[current_position][1] > pivot_value[1]:
 
             pivot_position = pivot_position + 1
             array[pivot_position], array[current_position] = (
                 array[current_position],
-                array[pivot_position]
+                array[pivot_position],
             )
             # move the current element to the end of the first list
 
@@ -159,7 +160,9 @@ def quick_algorithm(array, k, start, stop):
             # the sort essentially ignores half the array as long as it still gets k elements
             quick_algorithm(array, k, start, pivot_position - 1)
         else:
-            quick_algorithm(array, k - pivot_position + start - 1, pivot_position + 1, stop)
+            quick_algorithm(
+                array, k - pivot_position + start - 1, pivot_position + 1, stop
+            )
 
 
 # a partial selection sort algo
@@ -210,9 +213,14 @@ def main():
     extra_credit__selection_sort(copyof_subs, k)
     chart(copyof_subs)
     print([element for element in copyof_subs[:k]])
-    print([name for name, time in sorted(copyof_subs[:k], key=lambda x: x[1], reverse=True)])
+    print(
+        [
+            name
+            for name, time in sorted(copyof_subs[:k], key=lambda x: x[1], reverse=True)
+        ]
+    )
     test(unsorted_subs, copyof_subs, k)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

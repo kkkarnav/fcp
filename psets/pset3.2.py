@@ -48,18 +48,16 @@ def partition(array, start, stop):
     pivot_position, pivot_value = start, array[start]
 
     # start+1 to remove redundant self comparison, stop+1 because range is exclusive
-    for current_position in range(start+1, stop+1):
+    for current_position in range(start + 1, stop + 1):
 
         # CHANGE: use [1] to compare timestamps instead of the entire tuples
         # CHANGE: < to > to sort it descending instead of ascending
-        if (
-            array[current_position][1] > pivot_value[1]
-        ):
+        if array[current_position][1] > pivot_value[1]:
 
             pivot_position = pivot_position + 1
             array[pivot_position], array[current_position] = (
                 array[current_position],
-                array[pivot_position]
+                array[pivot_position],
             )
             # move the current element to the end of the first list
 
@@ -94,7 +92,9 @@ def quick_algorithm(array, k, start, stop):
             # the sort essentially ignores half the array as long as it still gets k elements
             quick_algorithm(array, k, start, pivot_position - 1)
         else:
-            quick_algorithm(array, k - pivot_position + start - 1, pivot_position + 1, stop)
+            quick_algorithm(
+                array, k - pivot_position + start - 1, pivot_position + 1, stop
+            )
 
 
 # a partial selection sort algo
@@ -137,8 +137,13 @@ def main():
     print("\nextra credit algo")
     extra_credit__selection_sort(copyof_subs, k)
     print([element for element in copyof_subs[:k]])
-    print([name for name, time in sorted(copyof_subs[:k], key=lambda x: x[1], reverse=True)])
+    print(
+        [
+            name
+            for name, time in sorted(copyof_subs[:k], key=lambda x: x[1], reverse=True)
+        ]
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
