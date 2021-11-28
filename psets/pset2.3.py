@@ -98,5 +98,5 @@ if __name__ == "__main__":
     # squareInSquare(0, 0, 80)  # part (c)
     # fractal(0, 0, 10, 10)  # part (d)
     # spiralOut(0, 0, 20, 10)  # part (e)
-    # drawFibonacci(0, 0, 2, 10)  # extra credit
+    drawFibonacci(0, 0, 2, 10)  # extra credit
     turtle.done()
